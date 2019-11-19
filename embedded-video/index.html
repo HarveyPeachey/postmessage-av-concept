@@ -6,7 +6,9 @@
 
 <script>
 window.addEventListener("message", function(event) {
-  document.getElementById("smp").contentWindow.postMessage(event.data, '*');
+  if (event.origin != http://localhost:8081)
+    return;
+  document.getElementById("smp").contentWindow.postMessage(event.data, 'http://localhost:8081');
 });
 </script>
 
