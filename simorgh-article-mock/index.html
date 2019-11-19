@@ -13,12 +13,14 @@
   <iframe id="videoEmbed" name="videoEmbed" src="" width="400px" height="200px" scrolling="no"></iframe>
   <button id="playButton" onclick="loadAndPlayVid(); removePlayButton()" type="button">Play Button (Simulates placeholder)</button>
 </div>
+<p>The iframe below is used to try and trick chrome, to satisfy chrome's policy on a user interacting on the same domain</p>
 <iframe id="externalButton" name="externalButton" src="http://localhost:8080/testdomain/" width="400px" height="200px" scrolling="no"></iframe>
 <script>
 
 // Loads video url and delays a post message to child iFrame
 function loadAndPlayVid() {
   document.getElementById("videoEmbed").src = "http://localhost:8080/";
+  // setTimeout delay is used to simulate video loading and event listening functionality
   setTimeout(function(){ document.getElementById("videoEmbed").contentWindow.postMessage('play-button-pressed', 'http://localhost:8080'); }, 3000);
 }
 
@@ -29,7 +31,7 @@ function removePlayButton() {
 
 // Listens for button pressed on http://localhost:8080/testdomain/
 window.addEventListener("message", function(event) {
-  if (event.origin != http://localhost:8080)
+  if (event.origin != "http://localhost:8080")
     return;
   document.getElementById("externalButton").style.display = "none";
   document.getElementById("videoEmbed").src = "http://localhost:8080/";

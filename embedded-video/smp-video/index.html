@@ -22,7 +22,7 @@ function pauseVid() {
 }
 
 window.addEventListener("message", function(event) {
-  if (event.origin != http://localhost:8081) 
+  if (event.origin != "http://localhost:8080" )
     return;
 
   playVid();
