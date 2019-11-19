@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>This page is in an iframe but is served on the same domain as the video</body>
+
+<button onclick="test()" type="button">Hide iframe and play</button>
+
+<script>
+
+function test() {
+  parent.postMessage('hide-iframe', '*');
+}
+
+</script>
+
+</html>

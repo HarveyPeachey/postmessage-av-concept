@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<iframe id="smp" src="smp-video/index.html" width="400px" height="200px"></iframe>
+
+<script>
+window.addEventListener("message", function(event) {
+  document.getElementById("smp").contentWindow.postMessage(event.data, '*');
+});
+</script>
+
+</body>
+</html>

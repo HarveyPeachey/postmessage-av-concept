@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<style>
+  #playButton {
+    position: absolute;
+    top: 195px;
+    left: 7px;
+  }
+</style>
+<body>
+
+<div class="MediaContainer">
+  <iframe id="videoEmbed" name="videoEmbed" src="" width="400px" height="200px" scrolling="no"></iframe>
+  <button id="playButton" onclick="loadAndPlayVid(); removePlayButton()" type="button">Play Button (Simulates placeholder)</button>
+</div>
+<iframe id="externalButton" name="externalButton" src="http://localhost:8080/testdomain/" width="400px" height="200px" scrolling="no"></iframe>
+<script>
+
+// Loads video url and delays a post message to child iFrame
+function loadAndPlayVid() {
+  document.getElementById("videoEmbed").src = "http://localhost:8080/";
+  setTimeout(function(){ document.getElementById("videoEmbed").contentWindow.postMessage('play-button-pressed', '*'); }, 3000);
+}
+
+// Remove play button from page
+function removePlayButton() {
+  document.getElementById("playButton").remove();
+}
+
+// Listens for button pressed on http://localhost:8080/testdomain/
+window.addEventListener("message", function(event) {
+  document.getElementById("externalButton").style.display = "none";
+  document.getElementById("videoEmbed").src = "http://localhost:8080/";
+  loadAndPlayVid();
+});
+
+</script>
+</body>
+</html>
